@@ -3,7 +3,49 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentMaster.Core", "InvestmentMaster.Core\InvestmentMaster.Core.csproj", "{6BF6434A-C0FC-4C75-9A06-6A9506E4D074}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentMaster.DataAccess", "InvestmentMaster.DataAccess\InvestmentMaster.DataAccess.csproj", "{36E2316C-3E0F-4833-ABDD-E9DD038A275E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentMaster.Entities", "InvestmentMaster.Entities\InvestmentMaster.Entities.csproj", "{321FC977-3391-4395-AF71-7652C041F2C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentMaster.BL", "InvestmentMaster.BL\InvestmentMaster.BL.csproj", "{59C8D029-FC52-4B1D-AFB1-A35903616FF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentMaster.BL.Tests", "InvestmentMaster.BL.Tests\InvestmentMaster.BL.Tests.csproj", "{A04CBB0B-DC74-409B-A4E3-B84C135110A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentMaster.DataAccess.Tests", "InvestmentMaster.DataAccess.Tests\InvestmentMaster.DataAccess.Tests.csproj", "{077E51D5-8E83-47D9-AA07-F4CF099F282F}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BF6434A-C0FC-4C75-9A06-6A9506E4D074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BF6434A-C0FC-4C75-9A06-6A9506E4D074}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BF6434A-C0FC-4C75-9A06-6A9506E4D074}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BF6434A-C0FC-4C75-9A06-6A9506E4D074}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36E2316C-3E0F-4833-ABDD-E9DD038A275E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36E2316C-3E0F-4833-ABDD-E9DD038A275E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36E2316C-3E0F-4833-ABDD-E9DD038A275E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36E2316C-3E0F-4833-ABDD-E9DD038A275E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{321FC977-3391-4395-AF71-7652C041F2C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{321FC977-3391-4395-AF71-7652C041F2C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{321FC977-3391-4395-AF71-7652C041F2C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{321FC977-3391-4395-AF71-7652C041F2C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59C8D029-FC52-4B1D-AFB1-A35903616FF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59C8D029-FC52-4B1D-AFB1-A35903616FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59C8D029-FC52-4B1D-AFB1-A35903616FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59C8D029-FC52-4B1D-AFB1-A35903616FF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A04CBB0B-DC74-409B-A4E3-B84C135110A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A04CBB0B-DC74-409B-A4E3-B84C135110A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A04CBB0B-DC74-409B-A4E3-B84C135110A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A04CBB0B-DC74-409B-A4E3-B84C135110A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{077E51D5-8E83-47D9-AA07-F4CF099F282F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{077E51D5-8E83-47D9-AA07-F4CF099F282F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{077E51D5-8E83-47D9-AA07-F4CF099F282F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{077E51D5-8E83-47D9-AA07-F4CF099F282F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
