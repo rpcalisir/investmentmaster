@@ -12,8 +12,6 @@ namespace InvestmentMaster.ConsoleUI
     {
         static void Main(string[] args)
         {
-
-
             Console.WriteLine("Saving Data...");
 
             List<Fund> funds = ComparisonFundReturns.GetFunds();
@@ -25,7 +23,9 @@ namespace InvestmentMaster.ConsoleUI
                     context.Funds.DeleteFromQuery();
                     context.Database.ExecuteSqlRaw("TRUNCATE TABLE [dbo].[Funds]");
 
+                    #pragma warning disable CS8602 // Dereference of a possibly null reference.
                     context.Funds.AddRange(funds);
+                    #pragma warning restore CS8602 // Dereference of a possibly null reference.
                     context.SaveChanges();
                 }
             }

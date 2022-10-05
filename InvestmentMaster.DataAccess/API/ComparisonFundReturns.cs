@@ -33,7 +33,7 @@ namespace InvestmentMaster.DataAccess.API
             }
             else
             {
-                return null;
+                return new List<Fund>();
             }
         }
 
@@ -82,6 +82,7 @@ namespace InvestmentMaster.DataAccess.API
                 }
                 catch (Exception ex)
                 {
+                    //TODO Instead of Console.WriteLine, implement Logging
                     Console.WriteLine(ex.Message);
                     return false;
                 }
