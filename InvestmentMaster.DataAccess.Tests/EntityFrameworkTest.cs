@@ -13,5 +13,16 @@ namespace InvestmentMaster.DataAccess.Tests
             var result = efFundDal.GetAll();
             Assert.AreEqual(450, result.Count);
         }
+
+        [TestMethod]    
+        public void Get_all_with_parameter_returns_filtered_funds()
+        {
+            EfFundDal efFundDal = new EfFundDal();
+
+            var result = efFundDal.GetAll(f => f.FONTURACIKLAMA.Contains("Hisse"));
+
+            Assert.AreEqual(86, result.Count);
+
+        }
     }
 }
