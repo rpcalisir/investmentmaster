@@ -17,8 +17,8 @@ namespace InvestmentMaster.DataAccess.API
 
         static ComparisonFundReturns()
         {
+            //TODO Log
             response = GetComparisonFundReturnsResponse();
-            Console.WriteLine(response);
         }
 
         #region Public Methods
@@ -28,11 +28,13 @@ namespace InvestmentMaster.DataAccess.API
 
             if (isResponseValid)
             {
+                //TODO Log
                 FundsList = JToken.Parse(response).ToObject<FundsReturnResponse>();
                 return FundsList.Data;
             }
             else
             {
+                //TODO Log
                 return new List<Fund>();
             }
         }
@@ -82,8 +84,7 @@ namespace InvestmentMaster.DataAccess.API
                 }
                 catch (Exception ex)
                 {
-                    //TODO Instead of Console.WriteLine, implement Logging
-                    Console.WriteLine(ex.Message);
+                    //TODO Implement Logging
                     return false;
                 }
             }
