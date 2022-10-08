@@ -16,18 +16,33 @@ namespace InvestmentMaster.ConsoleUI
 
             List<Fund> funds = ComparisonFundReturns.GetFunds();
 
+
             if (funds != null)
             {
                 using (FundContext context = new FundContext())
                 {
-                    context.Funds.DeleteFromQuery();
-                    context.Database.ExecuteSqlRaw("TRUNCATE TABLE [dbo].[Funds]");
+                    context.Database.EnsureCreated();
 
-                    #pragma warning disable CS8602 // Dereference of a possibly null reference.
-                    context.Funds.AddRange(funds);
-                    #pragma warning restore CS8602 // Dereference of a possibly null reference.
-                    context.SaveChanges();
+                    Console.WriteLine("Database is created!");
+                    //if (context.Funds.Count() == 0)
+                    //{
+                    //    context.Funds.AddRange(funds);
+                    //    context.SaveChanges();
+                    //}
+
+                    //    context.Funds.DeleteFromQuery();
+                    //    context.Database.ExecuteSqlRaw("TRUNCATE TABLE [dbo].[Funds]");
+
+                    //    #pragma warning disable CS8602 // Dereference of a possibly null reference.
+                    //    context.Funds.AddRange(funds);
+                    //    #pragma warning restore CS8602 // Dereference of a possibly null reference.
+                    //    context.SaveChanges();
+
                 }
+            }
+            else
+            {
+                Console.WriteLine("Response is not ok!");
             }
 
 
@@ -74,6 +89,14 @@ namespace InvestmentMaster.ConsoleUI
             //}
 
             Console.WriteLine("Data is saved.");
+
+            Console.ReadLine();
+
+            using (FundContext fundContext = new FundContext())
+            {
+                fundContext.Database.EnsureDeleted();
+                Console.WriteLine("Database is deleted!");
+            }
 
             Console.ReadLine();
         }
