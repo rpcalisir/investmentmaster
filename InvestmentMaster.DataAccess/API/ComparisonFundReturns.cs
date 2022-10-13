@@ -13,7 +13,7 @@ namespace InvestmentMaster.DataAccess.API
     public static class ComparisonFundReturns
     {
         private static FundsReturnResponse FundsList { get; set; }
-        private static string response;
+        private static IRestResponse response;
 
         static ComparisonFundReturns()
         {
@@ -29,12 +29,13 @@ namespace InvestmentMaster.DataAccess.API
             if (isResponseValid)
             {
                 //TODO Log
-                FundsList = JToken.Parse(response).ToObject<FundsReturnResponse>();
+                FundsList = JToken.Parse(response.Content).ToObject<FundsReturnResponse>();
                 return FundsList.Data;
             }
             else
             {
                 //TODO Log
+                Console.WriteLine("Response is not ok!");
                 return new List<Fund>();
             }
         }
@@ -42,12 +43,12 @@ namespace InvestmentMaster.DataAccess.API
         #endregion
 
         #region Private Implementation
-        private static string GetComparisonFundReturnsResponse()
+        private static IRestResponse GetComparisonFundReturnsResponse()
         {
             string baslangicTarihi = LatestWeekDayHelper.GetLatestWeekDay();
             string bitisTarihi = LatestWeekDayHelper.GetLatestWeekDay();
 
-            var client = new RestClient("https://www.tefas.gov.tr/api/DB/BindComparisonFundReturns");
+            var client = new RestClient("https://www.tefas.gov.tr/api/DB/BindComparisonFundReturnsx");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Accept", "application/json, text/javascript, */*; q=0.01");
             request.AddHeader("Accept-Language", "en-US,en;q=0.9");
@@ -69,17 +70,22 @@ namespace InvestmentMaster.DataAccess.API
             request.AddParameter("application/x-www-form-urlencoded; charset=UTF-8", $"calismatipi=2&fontip=YAT&sfontur=&kurucukod=&fongrup=&bastarih={baslangicTarihi}&bittarih={bitisTarihi}&fonturkod=&fonunvantip=&strperiod=1%2C1%2C1%2C1%2C1%2C1%2C1&islemdurum=1", ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
 
-            return response.Content;
+            return response;
         }
 
-        private static bool ValidateJSON(this string str)
+        private static bool ValidateJSON(this IRestResponse response)
         {
-            if ((str.StartsWith("{") && str.EndsWith("}")) || //For object
-                (str.StartsWith("[") && str.EndsWith("]"))) //For array
+            if (!response.IsSuccessful)
+            {
+                return false;
+            }
+
+            if ((response.Content.StartsWith("{") && response.Content.EndsWith("}")) || //For object
+                (response.Content.StartsWith("[") && response.Content.EndsWith("]"))) //For array
             {
                 try
                 {
-                    JToken.Parse(str).ToObject<FundsReturnResponse>();
+                    JToken.Parse(response.Content).ToObject<FundsReturnResponse>();
                     return true;
                 }
                 catch (Exception ex)
@@ -88,10 +94,8 @@ namespace InvestmentMaster.DataAccess.API
                     return false;
                 }
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
         #endregion
     }

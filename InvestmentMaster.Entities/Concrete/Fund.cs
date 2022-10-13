@@ -15,15 +15,15 @@ namespace InvestmentMaster.Entities.Concrete
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(4)]
+        [MaxLength(5)]
         public string FONKODU { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(150)]
         public string FONUNVAN { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(150)]
         public string FONTURACIKLAMA { get; set; }
         public double? GETIRI1A { get; set; }
         public double? GETIRI3A { get; set; }

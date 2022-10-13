@@ -24,11 +24,12 @@ namespace InvestmentMaster.ConsoleUI
                     context.Database.EnsureCreated();
 
                     Console.WriteLine("Database is created!");
-                    //if (context.Funds.Count() == 0)
-                    //{
-                    //    context.Funds.AddRange(funds);
-                    //    context.SaveChanges();
-                    //}
+
+                    if (context.Funds.Count() == 0)
+                    {
+                        context.Funds.AddRange(funds);
+                        context.SaveChanges();
+                    }
 
                     //    context.Funds.DeleteFromQuery();
                     //    context.Database.ExecuteSqlRaw("TRUNCATE TABLE [dbo].[Funds]");
