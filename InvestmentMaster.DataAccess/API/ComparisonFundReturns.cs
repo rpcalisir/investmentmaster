@@ -12,25 +12,25 @@ namespace InvestmentMaster.DataAccess.API
 {
     public static class ComparisonFundReturns
     {
-        private static FundsReturnResponse FundsList { get; set; }
-        private static IRestResponse response;
+        private static FundsReturnResponse _fundsList { get; set; }
+        private static IRestResponse _response;
 
         static ComparisonFundReturns()
         {
             //TODO Log
-            response = GetComparisonFundReturnsResponse();
+            _response = GetComparisonFundReturnsResponse();
         }
 
         #region Public Methods
         public static List<Fund> GetFunds()
         {
-            bool isResponseValid = ValidateJSON(response);
+            bool isResponseValid = ValidateJSON(_response);
 
             if (isResponseValid)
             {
                 //TODO Log
-                FundsList = JToken.Parse(response.Content).ToObject<FundsReturnResponse>();
-                return FundsList.Data;
+                _fundsList = JToken.Parse(_response.Content).ToObject<FundsReturnResponse>();
+                return _fundsList.Data;
             }
             else
             {
