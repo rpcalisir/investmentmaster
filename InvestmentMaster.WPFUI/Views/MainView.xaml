@@ -1,0 +1,40 @@
+﻿<Window x:Class="InvestmentMaster.WPFUI.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InvestmentMaster.WPFUI.Views"
+        xmlns:vm="clr-namespace:InvestmentMaster.WPFUI.ViewModels.Concrete"
+        mc:Ignorable="d"
+        Title="MainView" Height="450" Width="800"
+        WindowStyle="SingleBorderWindow"
+        WindowState="Maximized">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Background="Blue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                <Button Content="FON KARŞILAŞTIRMA" Margin="10,30,0,0" Width="200" Command="{Binding UpdateViewCommand}" CommandParameter="ComparisonFundReturnsView"/>
+                <Button Content="PORTFÖYÜM" Margin="10,30,0,0" Width="200" Command="{Binding UpdateViewCommand}" CommandParameter="PortfolioView"/>
+            </StackPanel>
+        </Grid >
+
+        <Grid Grid.Row="1" Background="Red" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--Binds 'SelectedViewModel' property from MainViewModel to this Window, so the logic will be built according to this property,-->
+            <!-- it will be chosen which page's viewModel is being used.-->
+            <ContentControl Content="{Binding SelectedViewModel}" />
+        </Grid>
+    </Grid>
+
+</Window>

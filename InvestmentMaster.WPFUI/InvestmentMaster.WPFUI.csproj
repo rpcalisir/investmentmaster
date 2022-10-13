@@ -7,4 +7,17 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Prism.Core" Version="8.1.97" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InvestmentMaster.DataAccess\InvestmentMaster.DataAccess.csproj" />
+    <ProjectReference Include="..\InvestmentMaster.Entities\InvestmentMaster.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="InvestmentMaster.WPFUI.Views.ComparisonFundReturnsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InvestmentMaster.WPFUI.Views"
+             xmlns:vm="clr-namespace:InvestmentMaster.WPFUI.ViewModels.Concrete"
+             mc:Ignorable="d" 
+             Height="auto" Width="auto">
+    <UserControl.DataContext>
+        <vm:ComparisonFundReturnsModel/>
+    </UserControl.DataContext>
+    <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Visible" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label x:Name="lbSearchFund" Content="FON ARA:" />
+                    <Viewbox Stretch="Uniform" StretchDirection="Both">
+                        <TextBox x:Name="tbSearchFund" Height="24" Width="100"  KeyUp="tbSearchFund_KeyUp" />
+                    </Viewbox>
+                </StackPanel>
+                <DataGrid x:Name="dgComparisonFundReturnView" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CanUserAddRows="False" AutoGenerateColumns="False" LoadingRow="dgComparisonFundReturnView_LoadingRow">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="Add" Content="Ekle" Click="btnAddClick" >
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="FON KODU" Binding="{Binding FONKODU}"/>
+                        <DataGridTextColumn Header="FON ADI" Binding="{Binding FONUNVAN}"/>
+                        <DataGridTextColumn Header="FON TÜRÜ" Binding="{Binding FONTURACIKLAMA}"/>
+                        <DataGridTextColumn Header="1 AY" Binding="{Binding GETIRI1A}"/>
+                        <DataGridTextColumn Header="3 AY" Binding="{Binding GETIRI3A}"/>
+                        <DataGridTextColumn Header="6 AY" Binding="{Binding GETIRI6A}"/>
+                        <DataGridTextColumn Header="YILBAŞI" Binding="{Binding GETIRIYB}"/>
+                        <DataGridTextColumn Header="1 YIL" Binding="{Binding GETIRI1Y}"/>
+                        <DataGridTextColumn Header="3 YIL" Binding="{Binding GETIRI3Y}"/>
+                        <DataGridTextColumn Header="5 YIL" Binding="{Binding GETIRI5Y}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

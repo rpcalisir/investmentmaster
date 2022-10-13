@@ -27,5 +27,7 @@ namespace InvestmentMaster.DataAccess.Concrete.EntityFramework
         }
 
         public DbSet<Fund>? Funds { get; set; }
+
+        public DbSet<SelectedFund> SavedFunds { get; set; }
     }
 }

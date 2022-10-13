@@ -48,7 +48,7 @@ namespace InvestmentMaster.DataAccess.API
             string baslangicTarihi = LatestWeekDayHelper.GetLatestWeekDay();
             string bitisTarihi = LatestWeekDayHelper.GetLatestWeekDay();
 
-            var client = new RestClient("https://www.tefas.gov.tr/api/DB/BindComparisonFundReturnsx");
+            var client = new RestClient("https://www.tefas.gov.tr/api/DB/BindComparisonFundReturns");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Accept", "application/json, text/javascript, */*; q=0.01");
             request.AddHeader("Accept-Language", "en-US,en;q=0.9");

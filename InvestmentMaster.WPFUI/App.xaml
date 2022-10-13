@@ -2,8 +2,23 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:InvestmentMaster.WPFUI"
-             StartupUri="MainWindow.xaml">
+             xmlns:views="clr-namespace:InvestmentMaster.WPFUI.Views"
+             xmlns:viewmodels="clr-namespace:InvestmentMaster.WPFUI.ViewModels.Concrete"
+             StartupUri="Views\MainView.xaml">
     <Application.Resources>
-         
+        <!--Whenever SelectedViewModel property which is bind to Content in ContentControl inside of MainView's xaml,-->
+        <!--has the value as 'ComparisonFundReturnsModel'-->
+        <!--then ComparisonFundReturnsView will be shown in main window-->
+        <DataTemplate DataType="{x:Type viewmodels:ComparisonFundReturnsModel}">
+            <views:ComparisonFundReturnsView/>
+        </DataTemplate>
+
+        <!--Whenever SelectedViewModel property which is bind to Content in ContentControl inside of MainView's xaml, has the value as 'PortfolioViewModel'-->
+        <!--then ComparisonFundReturnsView will be shown in main window-->
+        <!--Yani, MainView'da bind edilen SelectedViewModel property'sinin değerine göre, hangi View'ın gösterileceği burada belirleniyor.-->
+        <!--Bir nevi factory design pattern gibi.-->
+        <DataTemplate DataType="{x:Type viewmodels:PortfolioViewModel}">
+            <views:PortfolioView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>
