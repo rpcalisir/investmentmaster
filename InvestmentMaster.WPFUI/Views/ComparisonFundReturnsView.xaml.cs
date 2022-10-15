@@ -31,9 +31,10 @@ namespace InvestmentMaster.WPFUI.Views
         {
             InitializeComponent();
 
-            Funds = new ObservableCollection<Fund>(ComparisonFundReturnsModel.Funds);
+            //Funds = new ObservableCollection<Fund>(ComparisonFundReturnsModel.Funds);
+            Funds = ComparisonFundReturnsModel.Funds;
 
-            this.dgComparisonFundReturnView.ItemsSource = Funds;
+            this.dgComparisonFundReturnView.ItemsSource = ComparisonFundReturnsModel.Funds;
         }
 
         private void tbSearchFund_KeyUp(object sender, KeyEventArgs e)

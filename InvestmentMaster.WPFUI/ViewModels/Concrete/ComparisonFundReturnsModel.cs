@@ -17,23 +17,8 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
 
         static ComparisonFundReturnsModel()
         {
-            List<Fund> funds = ComparisonFundReturns.GetFunds();
-
-            if (funds != null)
-            {
-                using (FundContext context = new FundContext())
-                {
-                    context.Database.EnsureCreated();
-
-                    if (context.Funds.Count() == 0)
-                    {
-                        context.Funds.AddRange(funds);
-                        context.SaveChanges();
-                    }
-
-                    Funds = new ObservableCollection<Fund>(context.Funds.ToList());
-                }
-            }
+            EfFundDal efFundDal = new EfFundDal();
+            Funds = new ObservableCollection<Fund>(efFundDal.GetAll());
         }
     }
 }
