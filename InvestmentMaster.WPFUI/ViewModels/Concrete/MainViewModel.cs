@@ -25,6 +25,8 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
                 OnPropertyChanged(nameof(SelectedViewModel));
             }
         }
+        public ICommand UpdateViewCommand { get; set; }
+
         public MainViewModel()
         {
             FundTableDataCreatorUtilities.CreateFundTableData();
@@ -32,7 +34,6 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
             UpdateViewCommand = new UpdateViewCommand(this);
         }
 
-        public ICommand UpdateViewCommand { get; set; }
 
     }
 }
