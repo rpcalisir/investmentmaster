@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace InvestmentMaster.WPFUI.Commands
@@ -29,10 +30,18 @@ namespace InvestmentMaster.WPFUI.Commands
             if (parameter.ToString() == "ComparisonFundReturnsView")
             {
                 //viewModel.SelectedViewModel = new ComparisonFundReturnsModel();
-                ComparisonFundReturnsModel comparisonFundReturnsViewModel = new ComparisonFundReturnsModel();
-                viewModel.SelectedViewModel = comparisonFundReturnsViewModel;
+                try
+                {
+                    ComparisonFundReturnsModel comparisonFundReturnsViewModel = new ComparisonFundReturnsModel();
+                    viewModel.SelectedViewModel = comparisonFundReturnsViewModel;
 
-                RefreshPortfolioService.RefreshPortfolioTable(comparisonFundReturnsViewModel);
+                    RefreshPortfolioService.RefreshPortfolioTable(comparisonFundReturnsViewModel);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Connection cannot be created with Server!");
+                }
+                
 
             }
             else if (parameter.ToString() == "PortfolioView")

@@ -1,4 +1,5 @@
-﻿using InvestmentMaster.WPFUI.Commands;
+﻿using InvestmentMaster.DataAccess.Utilities;
+using InvestmentMaster.WPFUI.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,10 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
                 OnPropertyChanged(nameof(SelectedViewModel));
             }
         }
-
         public MainViewModel()
         {
+            FundTableDataCreatorUtilities.CreateFundTableData();
+
             UpdateViewCommand = new UpdateViewCommand(this);
         }
 

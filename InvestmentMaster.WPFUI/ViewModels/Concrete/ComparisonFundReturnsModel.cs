@@ -1,5 +1,6 @@
 ﻿using InvestmentMaster.DataAccess.API;
 using InvestmentMaster.DataAccess.Concrete.EntityFramework;
+using InvestmentMaster.DataAccess.Utilities;
 using InvestmentMaster.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
