@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InvestmentMaster.DataAccess.Helper
+namespace InvestmentMaster.DataAccess.Utilities
 {
     public class LatestWeekDayHelper
     {

@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace InvestmentMaster.DataAccess.Concrete.EntityFramework
 {
-    public class EfFundDal: EfEntityRepositoryBase<Fund, FundContext>, IFundDal
+    public class EfFundDal : EfEntityRepositoryBase<Fund, FundContext>, IFundDal
     {
+        public static implicit operator List<object>(EfFundDal v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using InvestmentMaster.DataAccess.Helper;
+﻿using InvestmentMaster.DataAccess.Utilities;
 using InvestmentMaster.Entities.Concrete;
 using Newtonsoft.Json.Linq;
 using RestSharp;
