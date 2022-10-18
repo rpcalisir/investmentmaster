@@ -8,7 +8,7 @@ namespace InvestmentMaster.DataAccess.Tests
         [TestMethod]
         public void Get_all_returns_all_funds()
         {
-            EfFundDal efFundDal = new EfFundDal();
+            EfComparisonFundDal efFundDal = new EfComparisonFundDal();
 
             var result = efFundDal.GetAll();
             Assert.AreEqual(450, result.Count);
@@ -17,7 +17,7 @@ namespace InvestmentMaster.DataAccess.Tests
         [TestMethod]    
         public void Get_all_with_parameter_returns_filtered_funds()
         {
-            EfFundDal efFundDal = new EfFundDal();
+            EfComparisonFundDal efFundDal = new EfComparisonFundDal();
 
             var result = efFundDal.GetAll(f => f.FONTURACIKLAMA.Contains("Hisse"));
 

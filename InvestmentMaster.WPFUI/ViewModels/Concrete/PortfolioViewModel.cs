@@ -1,4 +1,5 @@
-﻿using InvestmentMaster.DataAccess.Concrete.EntityFramework;
+﻿using InvestmentMaster.BL.Concrete.Managers;
+using InvestmentMaster.DataAccess.Concrete.EntityFramework;
 using InvestmentMaster.Entities.Concrete;
 using Prism.Commands;
 using System;
@@ -41,20 +42,31 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
 
         public PortfolioViewModel()
         {
-            List<SelectedFund> selectedFunds = new List<SelectedFund>();
-            //Funds = new List<Fund>();
+            //List<SelectedFund> selectedFunds = new List<SelectedFund>();
 
-            using (FundContext fundContext = new FundContext())
-            {
-                selectedFunds = fundContext.PortfolioFunds.ToList();
-                var fundCodes = selectedFunds.Select(f => f.FONKODU).ToList();
+            //using (FundContext fundContext = new FundContext())
+            //{
+            //    selectedFunds = fundContext.PortfolioFunds.ToList();
+            //    var fundCodes = selectedFunds.Select(f => f.FONKODU).ToList();
 
-                //var fundCodes = selectedFunds.Select(f => f.FONKODU).Intersect(fundContext.Funds.ToList().Select(x => x.FONKODU)).ToList();
-                Funds = new ObservableCollection<Fund>(fundContext.ComparisonFunds.Where(f => fundCodes.Contains(f.FONKODU)).ToList());
+            //    //var fundCodes = selectedFunds.Select(f => f.FONKODU).Intersect(fundContext.Funds.ToList().Select(x => x.FONKODU)).ToList();
+            //    Funds = new ObservableCollection<Fund>(fundContext.ComparisonFunds.Where(f => fundCodes.Contains(f.FONKODU)).ToList());
 
-                //Funds = new ObservableCollection<Fund>(fundContext.Funds.Where(f => fundCodes.Contains(f.FONKODU)).ToList());
-            }
+            //    //Funds = new ObservableCollection<Fund>(fundContext.Funds.Where(f => fundCodes.Contains(f.FONKODU)).ToList());
+            //}
 
+
+
+            //PortfolioFundManager portfolioFundManager = new(new EfPortfolioFundDal());
+            //var fundCodes = portfolioFundManager.GetAllPortfolioFunds().Select(p => p.FONKODU).ToList();
+
+            //ComparisonFundManager comparisonFundManager = new(new EfComparisonFundDal());
+
+            //Funds = new ObservableCollection<Fund>(comparisonFundManager.GetAllComparisonFunds(f => fundCodes.Contains(f.FONKODU)).ToList());
+
+            PortfolioFundManager portfolioFundManager = new(new EfPortfolioFundDal(), new EfComparisonFundDal());
+
+            _funds = new ObservableCollection<Fund>(portfolioFundManager.GetAllPortfolioFunds());
         }
     }
 }

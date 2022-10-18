@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InvestmentMaster.BL.Abstract
 {
-    public interface IFundService
+    public interface IPortfolioFundService
     {
-        List<Fund> GetAllFunds();
+        List<Fund> GetAllPortfolioFunds();
     }
 }

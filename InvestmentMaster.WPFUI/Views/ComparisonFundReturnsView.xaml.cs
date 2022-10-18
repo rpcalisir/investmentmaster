@@ -73,12 +73,12 @@ namespace InvestmentMaster.WPFUI.Views
         private void btnAddClick(object sender, RoutedEventArgs e)
         {
             Fund fund = dgComparisonFundReturnView.SelectedItem as Fund;
-            SelectedFund selectedFund = new SelectedFund();
+            PortfolioFund selectedFund = new PortfolioFund();
             selectedFund.FONKODU = fund.FONKODU;
 
             using (FundContext fundContext = new FundContext())
             {
-                if (fundContext.Set<SelectedFund>().Any(f => f.FONKODU == selectedFund.FONKODU))
+                if (fundContext.Set<PortfolioFund>().Any(f => f.FONKODU == selectedFund.FONKODU))
                 {
                     MessageBox.Show($"{selectedFund.FONKODU} Portföy'de mevcut!");
 

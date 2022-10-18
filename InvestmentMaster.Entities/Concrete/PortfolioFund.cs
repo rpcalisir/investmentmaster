@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InvestmentMaster.Entities.Concrete
 {
-    public class SelectedFund: IEntity
+    public class PortfolioFund: IEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

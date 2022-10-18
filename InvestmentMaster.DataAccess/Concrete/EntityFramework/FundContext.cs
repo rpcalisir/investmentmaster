@@ -28,6 +28,6 @@ namespace InvestmentMaster.DataAccess.Concrete.EntityFramework
 
         public DbSet<Fund>? ComparisonFunds { get; set; }
 
-        public DbSet<SelectedFund> PortfolioFunds { get; set; }
+        public DbSet<PortfolioFund> PortfolioFunds { get; set; }
     }
 }

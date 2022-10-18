@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InvestmentMaster.DataAccess.Abstract
 {
-    public interface IFundDal: IEntityRepository<Fund>
+    public interface IPortfolioFundDal: IEntityRepository<PortfolioFund>
     {
     }
 }

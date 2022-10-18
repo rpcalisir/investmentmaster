@@ -1,6 +1,8 @@
 ﻿using InvestmentMaster.DataAccess.API;
 using InvestmentMaster.DataAccess.Concrete.EntityFramework;
 using InvestmentMaster.Entities.Concrete;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +21,11 @@ namespace InvestmentMaster.DataAccess.Utilities
             {
                 using (FundContext context = new FundContext())
                 {
-                    context.Database.EnsureCreated();
-
-                    Console.WriteLine("Database is created!");
+                    if (!context.Database.GetService<IRelationalDatabaseCreator>().Exists())
+                    {
+                        //TODO LOG
+                        context.Database.EnsureCreated();
+                    }
 
                     if (!context.ComparisonFunds.Any())
                     {

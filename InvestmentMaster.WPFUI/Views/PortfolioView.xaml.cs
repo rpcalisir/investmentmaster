@@ -50,14 +50,14 @@ namespace InvestmentMaster.WPFUI.Views
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             Fund fund = dgPortfolioView.SelectedItem as Fund;
-            SelectedFund selectedFund = new SelectedFund
+            PortfolioFund selectedFund = new PortfolioFund
             {
                 FONKODU = fund.FONKODU
             };
 
             using (FundContext fundContext = new FundContext())
             {
-                if (fundContext.Set<SelectedFund>().Any(f => f.FONKODU == selectedFund.FONKODU))
+                if (fundContext.Set<PortfolioFund>().Any(f => f.FONKODU == selectedFund.FONKODU))
                 {
                     var fundToRemove = fundContext.PortfolioFunds.SingleOrDefault(f => f.FONKODU == selectedFund.FONKODU);
 

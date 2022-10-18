@@ -19,8 +19,8 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
 
         static ComparisonFundReturnsModel()
         {
-            FundManager fundManager = new FundManager(new EfFundDal());
-            Funds = new ObservableCollection<Fund>(fundManager.GetAllFunds());
+            ComparisonFundManager fundManager = new(new EfComparisonFundDal());
+            Funds = new ObservableCollection<Fund>(fundManager.GetAllComparisonFunds());
         }
     }
 }
