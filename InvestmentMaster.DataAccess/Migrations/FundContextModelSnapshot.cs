@@ -68,7 +68,25 @@ namespace InvestmentMaster.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Funds");
+                    b.ToTable("ComparisonFunds");
+                });
+
+            modelBuilder.Entity("InvestmentMaster.Entities.Concrete.SelectedFund", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("FONKODU")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PortfolioFunds");
                 });
 #pragma warning restore 612, 618
         }

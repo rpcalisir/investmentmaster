@@ -23,9 +23,9 @@ namespace InvestmentMaster.DataAccess.Utilities
 
                     Console.WriteLine("Database is created!");
 
-                    if (!context.Funds.Any())
+                    if (!context.ComparisonFunds.Any())
                     {
-                        context.Funds.AddRange(funds);
+                        context.ComparisonFunds.AddRange(funds);
                         context.SaveChanges();
                     }
                 }

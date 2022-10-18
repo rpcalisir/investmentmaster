@@ -46,11 +46,11 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
 
             using (FundContext fundContext = new FundContext())
             {
-                selectedFunds = fundContext.SavedFunds.ToList();
+                selectedFunds = fundContext.PortfolioFunds.ToList();
                 var fundCodes = selectedFunds.Select(f => f.FONKODU).ToList();
 
                 //var fundCodes = selectedFunds.Select(f => f.FONKODU).Intersect(fundContext.Funds.ToList().Select(x => x.FONKODU)).ToList();
-                Funds = new ObservableCollection<Fund>(fundContext.Funds.Where(f => fundCodes.Contains(f.FONKODU)).ToList());
+                Funds = new ObservableCollection<Fund>(fundContext.ComparisonFunds.Where(f => fundCodes.Contains(f.FONKODU)).ToList());
 
                 //Funds = new ObservableCollection<Fund>(fundContext.Funds.Where(f => fundCodes.Contains(f.FONKODU)).ToList());
             }

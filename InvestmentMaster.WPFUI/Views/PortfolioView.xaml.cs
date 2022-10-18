@@ -59,11 +59,11 @@ namespace InvestmentMaster.WPFUI.Views
             {
                 if (fundContext.Set<SelectedFund>().Any(f => f.FONKODU == selectedFund.FONKODU))
                 {
-                    var fundToRemove = fundContext.SavedFunds.SingleOrDefault(f => f.FONKODU == selectedFund.FONKODU);
+                    var fundToRemove = fundContext.PortfolioFunds.SingleOrDefault(f => f.FONKODU == selectedFund.FONKODU);
 
                     if (fundToRemove != null)
                     {
-                        fundContext.SavedFunds.Remove(fundToRemove);
+                        fundContext.PortfolioFunds.Remove(fundToRemove);
 
                         //dgPortfolioView.DataContext = null;
                         //dgPortfolioView.ItemsSource = portfolioViewModel.Funds;

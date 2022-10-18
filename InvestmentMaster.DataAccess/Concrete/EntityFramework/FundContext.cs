@@ -26,8 +26,8 @@ namespace InvestmentMaster.DataAccess.Concrete.EntityFramework
             //optionsBuilder.UseSqlServer(connectionString);
         }
 
-        public DbSet<Fund>? Funds { get; set; }
+        public DbSet<Fund>? ComparisonFunds { get; set; }
 
-        public DbSet<SelectedFund> SavedFunds { get; set; }
+        public DbSet<SelectedFund> PortfolioFunds { get; set; }
     }
 }

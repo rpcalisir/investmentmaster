@@ -9,7 +9,7 @@ namespace InvestmentMaster.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Funds",
+                name: "ComparisonFunds",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -27,14 +27,30 @@ namespace InvestmentMaster.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Funds", x => x.Id);
+                    table.PrimaryKey("PK_ComparisonFunds", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PortfolioFunds",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FONKODU = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PortfolioFunds", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Funds");
+                name: "ComparisonFunds");
+
+            migrationBuilder.DropTable(
+                name: "PortfolioFunds");
         }
     }
 }
