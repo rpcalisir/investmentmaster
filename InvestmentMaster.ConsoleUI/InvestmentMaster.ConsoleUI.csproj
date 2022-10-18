@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InvestmentMaster.BL\InvestmentMaster.BL.csproj" />
     <ProjectReference Include="..\InvestmentMaster.DataAccess\InvestmentMaster.DataAccess.csproj" />
     <ProjectReference Include="..\InvestmentMaster.Entities\InvestmentMaster.Entities.csproj" />
   </ItemGroup>

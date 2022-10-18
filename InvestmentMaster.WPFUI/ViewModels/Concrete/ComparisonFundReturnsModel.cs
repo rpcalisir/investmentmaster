@@ -1,4 +1,5 @@
-﻿using InvestmentMaster.DataAccess.API;
+﻿using InvestmentMaster.BL.Concrete.Managers;
+using InvestmentMaster.DataAccess.API;
 using InvestmentMaster.DataAccess.Concrete.EntityFramework;
 using InvestmentMaster.DataAccess.Utilities;
 using InvestmentMaster.Entities.Concrete;
@@ -18,8 +19,8 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
 
         static ComparisonFundReturnsModel()
         {
-            EfFundDal efFundDal = new EfFundDal();
-            Funds = new ObservableCollection<Fund>(efFundDal.GetAll());
+            FundManager fundManager = new FundManager(new EfFundDal());
+            Funds = new ObservableCollection<Fund>(fundManager.GetAllFunds());
         }
     }
 }

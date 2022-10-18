@@ -1,4 +1,5 @@
-﻿using InvestmentMaster.DataAccess.API;
+﻿using InvestmentMaster.BL.Concrete.Managers;
+using InvestmentMaster.DataAccess.API;
 using InvestmentMaster.DataAccess.Concrete.EntityFramework;
 using InvestmentMaster.DataAccess.Utilities;
 using InvestmentMaster.Entities.Concrete;
@@ -20,8 +21,8 @@ namespace InvestmentMaster.ConsoleUI
             List<Fund> fundsFromDb = new List<Fund>();
             if (isTableFilled)
             {
-                EfFundDal efFundDal = new EfFundDal();
-                fundsFromDb = efFundDal.GetAll();
+                FundManager fundManager = new FundManager(new EfFundDal());
+                fundsFromDb = fundManager.GetAllFunds();
             }
 
             Console.WriteLine(String.Format("{0,-10} | {1,-100} | {2,-30} | {3,-8} | {4,-15} | {5,-15} | {6,-15} | {7,-15} | {8,-15} | {9,-15}", "Fon Kodu", "Fon Adı", "Şemsiye Fon Türü", "1 Ay(%)", "3 Ay(%)", "6 Ay(%)", "Yılbaşı(%)", "1 Yıl(%)", "3 Yıl(%)", "5 Yıl(%)"));
