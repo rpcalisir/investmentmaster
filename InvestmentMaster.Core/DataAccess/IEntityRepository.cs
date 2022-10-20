@@ -20,6 +20,6 @@ namespace InvestmentMaster.Core.DataAccess
 
         T Add(T entity);
         T Update(T entity);
-        void Delete(T entity);
+        T Delete(T entity);
     }
 }

@@ -29,9 +29,19 @@ namespace InvestmentMaster.BL.Concrete.Managers
             return _comparisonFundDal.GetAll(f => fundCodes.Contains(f.FONKODU)).ToList();
         }
 
+        public List<PortfolioFund> GetAllPortfolioFundCodes()
+        {
+            return _portfolioFundDal.GetAll();
+        }
+
         public PortfolioFund AddPortfolioFund(PortfolioFund portfolioFund)
         {
             return _portfolioFundDal.Add(portfolioFund);
+        }
+
+        public PortfolioFund DeletePortfolioFund(PortfolioFund portfolioFund)
+        {
+            return _portfolioFundDal.Delete(portfolioFund);
         }
     }
 }

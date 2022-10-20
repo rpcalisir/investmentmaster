@@ -24,13 +24,13 @@ namespace InvestmentMaster.WPFUI.Views
     /// </summary>
     public partial class PortfolioView : UserControl
     {
-        //private readonly IPortfolioFundService _portfolioFundService;
+        private readonly IPortfolioFundService _portfolioFundService;
 
         public PortfolioView()
         {
             InitializeComponent();
 
-            //_portfolioFundService = InstanceFactory.GetInstance<IPortfolioFundService>();
+            _portfolioFundService = InstanceFactory.GetInstance<IPortfolioFundService>();
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -61,42 +61,56 @@ namespace InvestmentMaster.WPFUI.Views
                 FONKODU = fund.FONKODU
             };
 
-            using (FundContext fundContext = new FundContext())
+            var portfolioFundCodes = _portfolioFundService.GetAllPortfolioFundCodes();
+
+            if (portfolioFundCodes.Any(f => f.FONKODU == selectedFund.FONKODU))
             {
-                if (fundContext.Set<PortfolioFund>().Any(f => f.FONKODU == selectedFund.FONKODU))
-                {
-                    var fundToRemove = fundContext.PortfolioFunds.SingleOrDefault(f => f.FONKODU == selectedFund.FONKODU);
-
-                    if (fundToRemove != null)
-                    {
-                        fundContext.PortfolioFunds.Remove(fundToRemove);
-
-                        //dgPortfolioView.DataContext = null;
-                        //dgPortfolioView.ItemsSource = portfolioViewModel.Funds;
-                        //dgPortfolioView.Items.Refresh();
-                        //dgPortfolioView.UpdateLayout();
-                    }
-
-                    //fundContext.SavedFunds.Attach(selectedFund);
-                    //fundContext.SavedFunds.Remove(selectedFund);    
-
-                    MessageBox.Show($"{selectedFund.FONKODU} Portföy'den silindi!");
-
-                    //var entity = fundContext.Portfolio.SingleOrDefault(f => f.FONKODU == selectedFund.FONKODU);
-                    //if (entity != null)
-                    //{
-                    //    entity.FONKODU = selectedFund.FONKODU;
-                    //}
-                }
-                else
-                {
-                    MessageBox.Show($"{selectedFund.FONKODU} Portföy'de mevcut değil!");
-                }
-
-                fundContext.SaveChanges();
-
-                //RefreshPortfolioService.RefreshPortfolioTable(portfolioViewModel);
+                PortfolioFund fundToRemove = portfolioFundCodes.SingleOrDefault(f => f.FONKODU == selectedFund.FONKODU);
+                _portfolioFundService.DeletePortfolioFund(fundToRemove);
+                MessageBox.Show($"{selectedFund.FONKODU} Portföy'den silindi!");
             }
+            else
+            {
+                MessageBox.Show($"{selectedFund.FONKODU} Portföy'de mevcut değil!");
+            }
+
+
+            //using (FundContext fundContext = new FundContext())
+            //{
+            //    if (fundContext.Set<PortfolioFund>().Any(f => f.FONKODU == selectedFund.FONKODU))
+            //    {
+            //        var fundToRemove = fundContext.PortfolioFunds.SingleOrDefault(f => f.FONKODU == selectedFund.FONKODU);
+
+            //        if (fundToRemove != null)
+            //        {
+            //            fundContext.PortfolioFunds.Remove(fundToRemove);
+
+            //            //dgPortfolioView.DataContext = null;
+            //            //dgPortfolioView.ItemsSource = portfolioViewModel.Funds;
+            //            //dgPortfolioView.Items.Refresh();
+            //            //dgPortfolioView.UpdateLayout();
+            //        }
+
+            //        //fundContext.SavedFunds.Attach(selectedFund);
+            //        //fundContext.SavedFunds.Remove(selectedFund);    
+
+            //        MessageBox.Show($"{selectedFund.FONKODU} Portföy'den silindi!");
+
+            //        //var entity = fundContext.Portfolio.SingleOrDefault(f => f.FONKODU == selectedFund.FONKODU);
+            //        //if (entity != null)
+            //        //{
+            //        //    entity.FONKODU = selectedFund.FONKODU;
+            //        //}
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show($"{selectedFund.FONKODU} Portföy'de mevcut değil!");
+            //    }
+
+            //    fundContext.SaveChanges();
+
+            //    //RefreshPortfolioService.RefreshPortfolioTable(portfolioViewModel);
+            //}
         }
     }
 }
