@@ -29,6 +29,7 @@ namespace InvestmentMaster.WPFUI.Views
     {
         //ObservableCollection<Fund> Funds;
         private IComparisonFundService _comparisonFundService;
+        private IPortfolioFundService _portfolioFundService;
 
         public ComparisonFundReturnsView()
         {
@@ -40,6 +41,7 @@ namespace InvestmentMaster.WPFUI.Views
             //this.dgComparisonFundReturnView.ItemsSource = ComparisonFundReturnsModel.Funds;
 
             _comparisonFundService = InstanceFactory.GetInstance<IComparisonFundService>();
+            _portfolioFundService = InstanceFactory.GetInstance<IPortfolioFundService>();
 
             this.dgComparisonFundReturnView.ItemsSource = _comparisonFundService.GetAllComparisonFunds();
         }
@@ -52,9 +54,9 @@ namespace InvestmentMaster.WPFUI.Views
             //    dgComparisonFundReturnView.ItemsSource = filtered;
             //}
 
-            var filtered = _comparisonFundService.GetAllComparisonFunds().ToList().Where(f => f.FONKODU.StartsWith(tbSearchFund.Text,
+            var filteredFunds = _comparisonFundService.GetAllComparisonFunds().ToList().Where(f => f.FONKODU.StartsWith(tbSearchFund.Text,
                 StringComparison.InvariantCultureIgnoreCase) || f.FONUNVAN.StartsWith(tbSearchFund.Text, StringComparison.InvariantCultureIgnoreCase));
-            dgComparisonFundReturnView.ItemsSource = filtered;
+            dgComparisonFundReturnView.ItemsSource = filteredFunds;
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -83,26 +85,37 @@ namespace InvestmentMaster.WPFUI.Views
             PortfolioFund selectedFund = new PortfolioFund();
             selectedFund.FONKODU = fund.FONKODU;
 
-            using (FundContext fundContext = new FundContext())
+            //using (FundContext fundContext = new FundContext())
+            //{
+            //    if (fundContext.Set<PortfolioFund>().Any(f => f.FONKODU == selectedFund.FONKODU))
+            //    {
+            //        MessageBox.Show($"{selectedFund.FONKODU} Portföy'de mevcut!");
+
+            //        //var entity = fundContext.Portfolio.SingleOrDefault(f => f.FONKODU == selectedFund.FONKODU);
+            //        //if (entity != null)
+            //        //{
+            //        //    entity.FONKODU = selectedFund.FONKODU;
+            //        //}
+            //    }
+            //    else
+            //    {
+            //        fundContext.Entry(selectedFund).State = EntityState.Added;
+            //        MessageBox.Show($"{selectedFund.FONKODU} fonu Portföy'e eklendi!");
+            //    }
+
+            //    fundContext.SaveChanges();
+            //}
+
+            if (_portfolioFundService.GetAllPortfolioFunds().Any(f => f.FONKODU == selectedFund.FONKODU))
             {
-                if (fundContext.Set<PortfolioFund>().Any(f => f.FONKODU == selectedFund.FONKODU))
-                {
-                    MessageBox.Show($"{selectedFund.FONKODU} Portföy'de mevcut!");
-
-                    //var entity = fundContext.Portfolio.SingleOrDefault(f => f.FONKODU == selectedFund.FONKODU);
-                    //if (entity != null)
-                    //{
-                    //    entity.FONKODU = selectedFund.FONKODU;
-                    //}
-                }
-                else
-                {
-                    fundContext.Entry(selectedFund).State = EntityState.Added;
-                    MessageBox.Show($"{selectedFund.FONKODU} fonu Portföy'e eklendi!");
-                }
-
-                fundContext.SaveChanges();
+                MessageBox.Show($"{selectedFund.FONKODU} Portföy'de mevcut!");
             }
+            else
+            {
+                _portfolioFundService.AddPortfolioFund(selectedFund);
+                MessageBox.Show($"{selectedFund.FONKODU} fonu Portföy'e eklendi!");
+            }
+
         }
     }
 }

@@ -11,5 +11,6 @@ namespace InvestmentMaster.BL.Abstract
     public interface IPortfolioFundService
     {
         List<Fund> GetAllPortfolioFunds();
+        PortfolioFund AddPortfolioFund(PortfolioFund portfolioFund);
     }
 }
