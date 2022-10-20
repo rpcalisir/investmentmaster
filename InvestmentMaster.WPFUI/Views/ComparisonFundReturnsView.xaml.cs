@@ -1,4 +1,6 @@
-﻿using InvestmentMaster.DataAccess.Concrete.EntityFramework;
+﻿using InvestmentMaster.BL.Abstract;
+using InvestmentMaster.BL.DependncyResolvers.Ninject;
+using InvestmentMaster.DataAccess.Concrete.EntityFramework;
 using InvestmentMaster.Entities.Concrete;
 using InvestmentMaster.WPFUI.ViewModels.Concrete;
 using Microsoft.EntityFrameworkCore;
@@ -25,16 +27,21 @@ namespace InvestmentMaster.WPFUI.Views
     /// </summary>
     public partial class ComparisonFundReturnsView : UserControl
     {
-        ObservableCollection<Fund> Funds;
+        //ObservableCollection<Fund> Funds;
+        private IComparisonFundService _comparisonFundService;
 
         public ComparisonFundReturnsView()
         {
             InitializeComponent();
 
             //Funds = new ObservableCollection<Fund>(ComparisonFundReturnsModel.Funds);
-            Funds = ComparisonFundReturnsModel.Funds;
+            //Funds = ComparisonFundReturnsModel.Funds;
 
-            this.dgComparisonFundReturnView.ItemsSource = ComparisonFundReturnsModel.Funds;
+            //this.dgComparisonFundReturnView.ItemsSource = ComparisonFundReturnsModel.Funds;
+
+            _comparisonFundService = InstanceFactory.GetInstance<IComparisonFundService>();
+
+            this.dgComparisonFundReturnView.ItemsSource = _comparisonFundService.GetAllComparisonFunds();
         }
 
         private void tbSearchFund_KeyUp(object sender, KeyEventArgs e)
@@ -45,7 +52,7 @@ namespace InvestmentMaster.WPFUI.Views
             //    dgComparisonFundReturnView.ItemsSource = filtered;
             //}
 
-            var filtered = Funds.ToList().Where(f => f.FONKODU.StartsWith(tbSearchFund.Text,
+            var filtered = _comparisonFundService.GetAllComparisonFunds().ToList().Where(f => f.FONKODU.StartsWith(tbSearchFund.Text,
                 StringComparison.InvariantCultureIgnoreCase) || f.FONUNVAN.StartsWith(tbSearchFund.Text, StringComparison.InvariantCultureIgnoreCase));
             dgComparisonFundReturnView.ItemsSource = filtered;
         }

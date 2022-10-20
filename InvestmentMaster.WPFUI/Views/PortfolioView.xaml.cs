@@ -1,4 +1,6 @@
-﻿using InvestmentMaster.DataAccess.Concrete.EntityFramework;
+﻿using InvestmentMaster.BL.Abstract;
+using InvestmentMaster.BL.DependncyResolvers.Ninject;
+using InvestmentMaster.DataAccess.Concrete.EntityFramework;
 using InvestmentMaster.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -22,9 +24,13 @@ namespace InvestmentMaster.WPFUI.Views
     /// </summary>
     public partial class PortfolioView : UserControl
     {
+        //private readonly IPortfolioFundService _portfolioFundService;
+
         public PortfolioView()
         {
             InitializeComponent();
+
+            //_portfolioFundService = InstanceFactory.GetInstance<IPortfolioFundService>();
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

@@ -1,4 +1,6 @@
-﻿using InvestmentMaster.BL.Concrete.Managers;
+﻿using InvestmentMaster.BL.Abstract;
+using InvestmentMaster.BL.Concrete.Managers;
+using InvestmentMaster.BL.DependncyResolvers.Ninject;
 using InvestmentMaster.DataAccess.API;
 using InvestmentMaster.DataAccess.Concrete.EntityFramework;
 using InvestmentMaster.DataAccess.Utilities;
@@ -15,12 +17,25 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
 {
     public class ComparisonFundReturnsModel : BaseViewModel
     {
-        public static ObservableCollection<Fund> Funds { get; }
+        //public static ObservableCollection<Fund> Funds { get; }
 
-        static ComparisonFundReturnsModel()
+        //private IComparisonFundService _comparisonFundService;
+
+        //private static IComparisonFundService _comparisonFundService;
+
+        //public static IComparisonFundService ComparisonFundService
+        //{
+        //    get { return _comparisonFundService; }
+        //    set { _comparisonFundService = value; }
+        //}
+
+
+        public ComparisonFundReturnsModel()
         {
-            ComparisonFundManager fundManager = new(new EfComparisonFundDal());
-            Funds = new ObservableCollection<Fund>(fundManager.GetAllComparisonFunds());
+            //ComparisonFundManager fundManager = new ComparisonFundManager(new EfComparisonFundDal());
+            //Funds = new ObservableCollection<Fund>(fundManager.GetAllComparisonFunds());
+
+            //_comparisonFundService = InstanceFactory.GetInstance<IComparisonFundService>();
         }
     }
 }

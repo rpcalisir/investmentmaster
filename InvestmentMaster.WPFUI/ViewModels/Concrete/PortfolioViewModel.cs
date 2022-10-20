@@ -1,4 +1,6 @@
-﻿using InvestmentMaster.BL.Concrete.Managers;
+﻿using InvestmentMaster.BL.Abstract;
+using InvestmentMaster.BL.Concrete.Managers;
+using InvestmentMaster.BL.DependncyResolvers.Ninject;
 using InvestmentMaster.DataAccess.Concrete.EntityFramework;
 using InvestmentMaster.Entities.Concrete;
 using Prism.Commands;
@@ -16,6 +18,8 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
         //public static List<Fund> Funds;
         //public static ObservableCollection<Fund> Funds { get; }
 
+        private readonly IPortfolioFundService _portfolioFundService;
+        private DelegateCommand<Fund> _deletePortfolioFundCommand;
         private ObservableCollection<Fund> _funds;
 
         public ObservableCollection<Fund> Funds
@@ -31,17 +35,9 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
             }
         }
 
-        private DelegateCommand<Fund> _deletePortfolioFundCommand;
-        public DelegateCommand<Fund> DeletePortfolioFundCommand =>
-            _deletePortfolioFundCommand ?? (_deletePortfolioFundCommand = new DelegateCommand<Fund>(ExecuteDeletePortfolioFundCommand));
-
-        void ExecuteDeletePortfolioFundCommand(Fund parameter)
-        {
-            Funds.Remove(parameter);
-        }
-
         public PortfolioViewModel()
         {
+            _portfolioFundService = InstanceFactory.GetInstance<IPortfolioFundService>();
             //List<SelectedFund> selectedFunds = new List<SelectedFund>();
 
             //using (FundContext fundContext = new FundContext())
@@ -56,7 +52,6 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
             //}
 
 
-
             //PortfolioFundManager portfolioFundManager = new(new EfPortfolioFundDal());
             //var fundCodes = portfolioFundManager.GetAllPortfolioFunds().Select(p => p.FONKODU).ToList();
 
@@ -64,9 +59,20 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
 
             //Funds = new ObservableCollection<Fund>(comparisonFundManager.GetAllComparisonFunds(f => fundCodes.Contains(f.FONKODU)).ToList());
 
-            PortfolioFundManager portfolioFundManager = new(new EfPortfolioFundDal(), new EfComparisonFundDal());
 
-            _funds = new ObservableCollection<Fund>(portfolioFundManager.GetAllPortfolioFunds());
+            //PortfolioFundManager portfolioFundManager = new(new EfPortfolioFundDal(), new EfComparisonFundDal());
+
+            _funds = new ObservableCollection<Fund>(_portfolioFundService.GetAllPortfolioFunds());
+        }
+
+        //public DelegateCommand<Fund> DeletePortfolioFundCommand =>
+        //_deletePortfolioFundCommand ?? (_deletePortfolioFundCommand = new DelegateCommand<Fund>(ExecuteDeletePortfolioFundCommand));
+        public DelegateCommand<Fund> DeletePortfolioFundCommand =>
+            _deletePortfolioFundCommand ?? (_deletePortfolioFundCommand = new DelegateCommand<Fund>(ExecuteDeletePortfolioFundCommand));
+
+        void ExecuteDeletePortfolioFundCommand(Fund fund)
+        {
+            Funds.Remove(fund);
         }
     }
 }
