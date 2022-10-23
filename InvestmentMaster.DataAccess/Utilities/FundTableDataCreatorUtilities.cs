@@ -1,6 +1,7 @@
 ﻿using InvestmentMaster.DataAccess.API;
 using InvestmentMaster.DataAccess.Concrete.EntityFramework;
 using InvestmentMaster.Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
@@ -25,13 +26,22 @@ namespace InvestmentMaster.DataAccess.Utilities
                     {
                         //TODO LOG
                         context.Database.EnsureCreated();
-                    }
-
-                    if (!context.ComparisonFunds.Any())
-                    {
                         context.ComparisonFunds.AddRange(funds);
                         context.SaveChanges();
                     }
+                    else
+                    {
+                        //TODO LOG
+                        context.Database.ExecuteSqlRaw("TRUNCATE TABLE [dbo].[ComparisonFunds]");
+                        context.ComparisonFunds.AddRange(funds);
+                        context.SaveChanges();
+                    }
+
+                    //if (!context.ComparisonFunds.Any())
+                    //{
+                    //    context.ComparisonFunds.AddRange(funds);
+                    //    context.SaveChanges();
+                    //}
                 }
                 return true;
             }

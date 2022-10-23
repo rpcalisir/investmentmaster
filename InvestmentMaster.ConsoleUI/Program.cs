@@ -36,13 +36,16 @@ namespace InvestmentMaster.ConsoleUI
 
             Console.ReadLine();
 
-            //using (FundContext fundContext = new FundContext())
-            //{
-            //    fundContext.Database.EnsureDeleted();
-            //    Console.WriteLine("Database is deleted!");
-            //}
+            using (FundContext fundContext = new FundContext())
+            {
+                //    //fundContext.Database.EnsureDeleted();
+                //    //Console.WriteLine("Database is deleted!");
 
-            //Console.ReadLine();
-        }
+                fundContext.Database.ExecuteSqlRaw("TRUNCATE TABLE [dbo].[ComparisonFunds]");
+                fundContext.SaveChanges();
+            }
+
+        //Console.ReadLine();
+    }
     }
 }
