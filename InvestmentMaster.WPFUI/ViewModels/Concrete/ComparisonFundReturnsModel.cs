@@ -17,7 +17,30 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
 {
     public class ComparisonFundReturnsModel : BaseViewModel
     {
-        //public static ObservableCollection<Fund> Funds { get; }
+        //private readonly IComparisonFundService _comparisonFundService;
+        //private readonly IPortfolioFundService _portfolioFundService;
+
+        //public IComparisonFundService ComparisonFundService { get; private set; }
+        //public IPortfolioFundService PortfolioFundService { get; private set; }
+
+        private IComparisonFundService _comparisonFundService;
+
+        public IComparisonFundService ComparisonFundService
+        {
+            get { return _comparisonFundService; }
+            set { _comparisonFundService = value; }
+        }
+
+        private IPortfolioFundService _portfolioFundService;
+
+        public IPortfolioFundService PortfolioFundService
+        {
+            get { return _portfolioFundService; }
+            set { _portfolioFundService = value; }
+        }
+
+        public ObservableCollection<Fund> ComparisonFunds { get; private set; }
+        public ObservableCollection<Fund> PortfolioFunds { get; private set; }
 
         //private IComparisonFundService _comparisonFundService;
 
@@ -33,9 +56,19 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
         public ComparisonFundReturnsModel()
         {
             //ComparisonFundManager fundManager = new ComparisonFundManager(new EfComparisonFundDal());
-            //Funds = new ObservableCollection<Fund>(fundManager.GetAllComparisonFunds());
 
             //_comparisonFundService = InstanceFactory.GetInstance<IComparisonFundService>();
+
+            _comparisonFundService = InstanceFactory.GetInstance<IComparisonFundService>();
+            _portfolioFundService = InstanceFactory.GetInstance<IPortfolioFundService>();
+
+            ComparisonFunds = new ObservableCollection<Fund>(_comparisonFundService.GetAllComparisonFunds());
+            PortfolioFunds = new ObservableCollection<Fund>(_portfolioFundService.GetAllPortfolioFunds());
+        }
+
+        public void AddPortfolioFund(PortfolioFund portfolioFund)
+        {
+            _portfolioFundService.AddPortfolioFund(portfolioFund);
         }
     }
 }

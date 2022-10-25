@@ -27,23 +27,24 @@ namespace InvestmentMaster.WPFUI.Views
     /// </summary>
     public partial class ComparisonFundReturnsView : UserControl
     {
-        //ObservableCollection<Fund> Funds;
-        private IComparisonFundService _comparisonFundService;
-        private IPortfolioFundService _portfolioFundService;
+        //private readonly ObservableCollection<Fund> ComparisonFunds;
+        //private readonly ObservableCollection<Fund> PortfolioFunds;
+
+        private readonly ComparisonFundReturnsModel comparisonFundReturnsModel;
 
         public ComparisonFundReturnsView()
         {
             InitializeComponent();
 
-            //Funds = new ObservableCollection<Fund>(ComparisonFundReturnsModel.Funds);
+            //ComparisonFunds = new ObservableCollection<Fund>(comparisonFundReturnsModel.ComparisonFunds);
+            //PortfolioFunds = new ObservableCollection<Fund>(comparisonFundReturnsModel.PortfolioFunds);
             //Funds = ComparisonFundReturnsModel.Funds;
 
             //this.dgComparisonFundReturnView.ItemsSource = ComparisonFundReturnsModel.Funds;
 
-            _comparisonFundService = InstanceFactory.GetInstance<IComparisonFundService>();
-            _portfolioFundService = InstanceFactory.GetInstance<IPortfolioFundService>();
 
-            this.dgComparisonFundReturnView.ItemsSource = _comparisonFundService.GetAllComparisonFunds();
+            comparisonFundReturnsModel = new ComparisonFundReturnsModel();
+            this.dgComparisonFundReturnView.ItemsSource = comparisonFundReturnsModel.ComparisonFunds;
         }
 
         private void tbSearchFund_KeyUp(object sender, KeyEventArgs e)
@@ -54,8 +55,10 @@ namespace InvestmentMaster.WPFUI.Views
             //    dgComparisonFundReturnView.ItemsSource = filtered;
             //}
 
-            var filteredFunds = _comparisonFundService.GetAllComparisonFunds().ToList().Where(f => f.FONKODU.StartsWith(tbSearchFund.Text,
-                StringComparison.InvariantCultureIgnoreCase) || f.FONUNVAN.StartsWith(tbSearchFund.Text, StringComparison.InvariantCultureIgnoreCase));
+            var filteredFunds = comparisonFundReturnsModel.ComparisonFundService.GetAllComparisonFunds().
+                Where(f => f.FONKODU.StartsWith(tbSearchFund.Text,
+                StringComparison.InvariantCultureIgnoreCase) || 
+                f.FONUNVAN.StartsWith(tbSearchFund.Text, StringComparison.InvariantCultureIgnoreCase));
             dgComparisonFundReturnView.ItemsSource = filteredFunds;
         }
 
@@ -106,16 +109,16 @@ namespace InvestmentMaster.WPFUI.Views
             //    fundContext.SaveChanges();
             //}
 
-            if (_portfolioFundService.GetAllPortfolioFunds().Any(f => f.FONKODU == selectedFund.FONKODU))
+            if (comparisonFundReturnsModel.PortfolioFundService.GetAllPortfolioFunds().
+                Any(f => f.FONKODU == selectedFund.FONKODU))
             {
                 MessageBox.Show($"{selectedFund.FONKODU} Portföy'de mevcut!");
             }
             else
             {
-                _portfolioFundService.AddPortfolioFund(selectedFund);
+                comparisonFundReturnsModel.PortfolioFundService.AddPortfolioFund(selectedFund);
                 MessageBox.Show($"{selectedFund.FONKODU} fonu Portföy'e eklendi!");
             }
-
         }
     }
 }
