@@ -9,7 +9,5 @@ namespace InvestmentMaster.WPFUI.ViewModels.Abstract
 {
     public interface IBaseViewModel
     {
-        List<Fund> Funds { get; set; }
-
     }
 }

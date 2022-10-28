@@ -11,8 +11,6 @@ namespace InvestmentMaster.WPFUI.ViewModels.Concrete
 {
     public class BaseViewModel : INotifyPropertyChanged, IBaseViewModel
     {
-        public List<Fund> Funds { get; set; }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
