@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:InvestmentMaster.WPFUI"
              xmlns:views="clr-namespace:InvestmentMaster.WPFUI.Views"
-             xmlns:viewmodels="clr-namespace:InvestmentMaster.WPFUI.ViewModels.Concrete"
-             StartupUri="Views\MainView.xaml">
+             xmlns:viewmodels="clr-namespace:InvestmentMaster.WPFUI.ViewModels.Concrete">
+            <!-- This is removed becasue MainView is being instantiated in App.xaml.cs now.-->
+            <!--StartupUri="Views\MainView.xaml"-->
     <Application.Resources>
         <!--Whenever SelectedViewModel property which is bind to Content in ContentControl inside of MainView's xaml,-->
         <!--has the value as 'ComparisonFundReturnsModel'-->

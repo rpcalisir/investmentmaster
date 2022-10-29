@@ -26,7 +26,9 @@ namespace InvestmentMaster.WPFUI.Views
 
             //Binds MainViewModel to MainView as it becomes the view's data.
             //This means MainViewModel contains all the data that MainView works with.
-            DataContext = new MainViewModel();
+
+            //This logic is moved into App.xaml.cs to prevent coupling between View and ViewModel
+            //DataContext = new MainViewModel();
         }
     }
 }
